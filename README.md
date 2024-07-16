@@ -1,36 +1,21 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
 ## Getting Started
 
-First, run the development server:
+Assuming that you have Docker installed. If you do not have it installed yet please go [here](https://docs.docker.com/engine/install/)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+at the root of the project run the following command to build the docker image:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`docker build -t next_docker:v1.0.1 . `
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Note that the period needs to be a part of the command
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The build may take a couple minutes, once completed you can check if the image is available with the command: 
 
-## Learn More
+`docker images`
 
-To learn more about Next.js, take a look at the following resources:
+this should show you the image you just created in the terminal output. once you confirm that you can start your container with the following command:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`docker run -p 3000:3000 next_docker:v1.0.1`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+you should be able to access the app at localhost:3000
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Note that changes to the file will require the image being rebuilt in order to see the change reflected in the application. alternatively you would have to access the file directly in the container
